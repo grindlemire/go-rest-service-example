@@ -7,7 +7,8 @@ import (
 
 // Opts ...
 type Opts struct {
-	Port int `required:"true"`
+	ServePort   int `required:"true" split_words:"true"`
+	MetricsPort int `required:"true" split_words:"true"`
 }
 
 // Load the configuration

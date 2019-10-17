@@ -7,13 +7,13 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/grindlemire/go-rest-service-example/pkg/config"
-	"github.com/grindlemire/go-rest-service-example/pkg/handler"
+	"github.com/grindlemire/go-rest-service-example/pkg/handlers"
 )
 
 // NewRouter creates a new mux router with all our handlers configured
 func NewRouter(opts config.Opts) (r *mux.Router, err error) {
 	r = mux.NewRouter()
-	r.NotFoundHandler = http.HandlerFunc(handler.NotFoundPage)
+	r.NotFoundHandler = http.HandlerFunc(handlers.NotFoundPage)
 	v1Router := r.PathPrefix("/v1").Subrouter()
 
 	// Protected Paths
@@ -23,7 +23,7 @@ func NewRouter(opts config.Opts) (r *mux.Router, err error) {
 	authRouter.NewRoute().
 		Methods(http.MethodGet).
 		Path("/user/{id:[a-zA-Z0-9]+}").
-		HandlerFunc(handler.AuthedPage)
+		HandlerFunc(handlers.AuthedPage)
 
 	// Public paths
 	// Create a subrouter for our public paths
@@ -31,7 +31,7 @@ func NewRouter(opts config.Opts) (r *mux.Router, err error) {
 	publicRouter.NewRoute().
 		Methods(http.MethodGet).
 		Path("/public").
-		HandlerFunc(handler.PublicPage)
+		HandlerFunc(handlers.PublicPage)
 
 	return r, nil
 }

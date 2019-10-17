@@ -4,6 +4,8 @@ import (
 	"io"
 	"syscall"
 
+	"github.com/grindlemire/go-rest-service-example/pkg/metrics"
+
 	"github.com/grindlemire/go-rest-service-example/pkg/server"
 	"github.com/vrecan/death"
 
@@ -27,7 +29,13 @@ func main() {
 	d := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 	goRoutines := []io.Closer{}
 
-	s := server.NewServer(opts, router)
+	// start the prometheus server
+	m := metrics.NewServer(opts.MetricsPort)
+	m.Start()
+	goRoutines = append(goRoutines, m)
+
+	// start the rest web server
+	s := server.NewServer(opts.ServePort, router)
 	s.Start()
 	goRoutines = append(goRoutines, s)
 
@@ -35,5 +43,4 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to shut down gracefully: %v", err)
 	}
-	log.Info("cleanly shut down")
 }

@@ -5,7 +5,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/handler"
+	"github.com/grindlemire/go-rest-service-example/pkg/handlers"
 
 	"github.com/grindlemire/log"
 )
@@ -18,7 +18,7 @@ func Authenticator(next http.Handler) http.Handler {
 		username, _, found := r.BasicAuth()
 		// This is where the authentication would go to make sure users are authorized
 		if !found || username != vars["id"] {
-			http.HandlerFunc(handler.NotAuthedPage).ServeHTTP(w, r)
+			http.HandlerFunc(handlers.NotAuthedPage).ServeHTTP(w, r)
 			return
 		}
 
