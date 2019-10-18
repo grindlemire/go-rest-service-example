@@ -9,7 +9,10 @@ import (
 	"github.com/google/uuid"
 )
 
-// RequestFingerprint manages the fingerprint information for a request
+// RequestFingerprint manages the fingerprint information for a request. This struct is passed
+// in a context via the http.Request `WithContext` function. This means that anything downstream
+// of the fingerpring will have access to the information within the fingerprint simply by calling
+// the `GetRequestFingerprint(r) function.`
 type RequestFingerprint struct {
 	mu *sync.RWMutex
 
