@@ -23,7 +23,6 @@ type Server struct {
 func NewServer(port int, handler http.Handler) (s Server) {
 	// This is where cors header stuff would be inserted
 	c := cors.New(cors.Options{})
-
 	s = Server{
 		Life: life.NewLife(),
 		server: &http.Server{
