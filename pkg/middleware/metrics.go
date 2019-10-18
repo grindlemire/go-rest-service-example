@@ -25,7 +25,7 @@ var (
 	}, []string{"endpoint"})
 	requests = promauto.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "http",
-		Name:      "ActiveRequests",
+		Name:      "active_requests",
 		Help:      "The number of active requests",
 	}, []string{"path"})
 )
