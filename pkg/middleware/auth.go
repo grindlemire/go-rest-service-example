@@ -9,8 +9,18 @@ import (
 	"github.com/grindlemire/log"
 )
 
-// Authenticator authenticates requests
-func Authenticator(next http.Handler) http.Handler {
+// Authenticator manages the authentication for requests
+type Authenticator struct {
+	// a db connection or something would go here
+}
+
+// NewAuthenticator creates a new authenticator struct that could be used to authenticate requests
+func NewAuthenticator() *Authenticator {
+	return &Authenticator{}
+}
+
+// Authenticate authenticates requests for the authenticator
+func (a Authenticator) Authenticate(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// get our route variables out of the path
 		pathVars := mux.Vars(r)
