@@ -1,7 +1,12 @@
 # go-rest-service-example
-An example of a cleanly written go service for serving rest requests.
+An example of a cleanly written go service for serving rest requests while implementing basic metrics and handling lifcycle elements gracefully.
 
-This package uses [gorilla/mux](https://github.com/gorilla/mux) as the base webserver. In general I prefer mux because it is less opinionated than some of the popular frameworks and it isn't that much more work to do what I want.
+
+This package uses [gorilla/mux](https://github.com/gorilla/mux) as the base webserver. In general I prefer mux because it is less clunky than most frameworks in go while providing the flexibility I want for a complex rest server. Also there is no magic. You create a router, register your handlers, and set your middleware and you can test all of that with relative ease.
+
+
+# running with docker-compose
+In the [docker](./docker) directory run `docker-compose up`. Prometheus will be listening on http://localhost:9090. The service will be receiving rest requests on http://localhost:4445 and it's metrics endpoint will be on http://localhost:4446
 
 ## package responsibility
 - [pkg/rest](./pkg/rest) - Contains the lifecycle management for the rest server
