@@ -4,15 +4,13 @@ import (
 	"io"
 	"syscall"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/metrics"
-
-	"github.com/grindlemire/go-rest-service-example/pkg/server"
+	"github.com/grindlemire/log"
 	"github.com/vrecan/death"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/router"
-	"github.com/grindlemire/log"
-
 	"github.com/grindlemire/go-rest-service-example/pkg/config"
+	"github.com/grindlemire/go-rest-service-example/pkg/metrics"
+	"github.com/grindlemire/go-rest-service-example/pkg/router"
+	"github.com/grindlemire/go-rest-service-example/pkg/server"
 )
 
 func main() {

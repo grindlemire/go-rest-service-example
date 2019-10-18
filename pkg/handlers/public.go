@@ -3,8 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
 	"github.com/grindlemire/log"
+
+	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
 )
 
 // PublicPage handles the public endpoint response

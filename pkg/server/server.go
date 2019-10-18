@@ -6,10 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/rs/cors"
-
 	"github.com/grindlemire/log"
-
+	"github.com/rs/cors"
 	"github.com/vrecan/life"
 )
 

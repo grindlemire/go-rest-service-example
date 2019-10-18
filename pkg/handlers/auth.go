@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
-
 	"github.com/grindlemire/log"
+
+	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
 )
 
 // AuthedPage handles the user authed endpoint response

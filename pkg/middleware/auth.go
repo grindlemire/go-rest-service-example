@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-
 	"github.com/grindlemire/log"
 )
 

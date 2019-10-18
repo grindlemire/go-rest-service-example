@@ -5,10 +5,9 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/felixge/httpsnoop"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-
-	"github.com/felixge/httpsnoop"
 )
 
 // These are the counters we will use for our request stats

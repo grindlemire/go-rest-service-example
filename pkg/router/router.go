@@ -3,11 +3,11 @@ package router
 import (
 	"net/http"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
-
 	"github.com/gorilla/mux"
+
 	"github.com/grindlemire/go-rest-service-example/pkg/config"
 	"github.com/grindlemire/go-rest-service-example/pkg/handlers"
+	"github.com/grindlemire/go-rest-service-example/pkg/middleware"
 )
 
 // NewRouter creates a new mux router with all our handlers configured
