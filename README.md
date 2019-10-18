@@ -1,7 +1,7 @@
 # go-rest-service-example
 An example of a cleanly written go service for serving rest requests.
 
-This package uses [gorilla/mux]() as the base webserver. In general I prefer mux because it is less opinionated than some of the popular frameworks and it isn't that much more work to do what I want.
+This package uses [gorilla/mux](https://github.com/gorilla/mux) as the base webserver. In general I prefer mux because it is less opinionated than some of the popular frameworks and it isn't that much more work to do what I want.
 
 ## package responsibility
 - [pkg/rest](./pkg/rest) - Contains the lifecycle management for the rest server
