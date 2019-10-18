@@ -27,7 +27,7 @@ func NewServer(port int) (s *Server) {
 		Life: life.NewLife(),
 		server: &http.Server{
 			Handler:      r,
-			Addr:         fmt.Sprintf("127.0.0.1:%d", port),
+			Addr:         fmt.Sprintf(":%d", port),
 			ReadTimeout:  10 * time.Second,
 			WriteTimeout: 10 * time.Second,
 		},

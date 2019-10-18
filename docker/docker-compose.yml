@@ -1,0 +1,27 @@
+version: '3'
+services:
+  go-rest-service:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    container_name: go-rest-service
+    ports:
+      - "4445:4445"
+      - "4446:4446"
+    networks:
+      - internal
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - internal
+    depends_on:
+      - go-rest-service
+    
+networks:
+  internal:
+    driver: bridge

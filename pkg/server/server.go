@@ -25,7 +25,7 @@ func NewServer(port int, handler http.Handler) (s Server) {
 		Life: life.NewLife(),
 		server: &http.Server{
 			Handler:      c.Handler(handler),
-			Addr:         fmt.Sprintf("127.0.0.1:%d", port),
+			Addr:         fmt.Sprintf(":%d", port),
 			ReadTimeout:  10 * time.Second,
 			WriteTimeout: 10 * time.Second,
 		},
@@ -35,7 +35,7 @@ func NewServer(port int, handler http.Handler) (s Server) {
 }
 
 func (s Server) run() {
-	log.Infof("server starting to listen on %s", s.server.Addr)
+	log.Infof("server starting to listen on [%s]", s.server.Addr)
 	go func() {
 		err := s.server.ListenAndServe()
 		if err != nil && err != http.ErrServerClosed {
