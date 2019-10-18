@@ -18,11 +18,11 @@ In the [docker](./docker) directory run `docker-compose up`. Prometheus will be 
 
 
 ## middleware
-- The way the middleware handles requests is:
+- Request pathing is the following:
     ```
-    fingerprinting -> metrics -> auth
+    fingerprinting -> metrics -> auth -> ... -> handler
     ```
-    Because we want to fingerprint every request but run metrics on as much of the request lifecycle as possible
+    Because we want to fingerprint every request but run metrics on as much of the request lifecycle as possible. Right now fingerprinting, metrics, and auth are the only middleware implemented but in a real project it could easily be extended in the [middleware](./pkg/middleware) package.
 
 ## metrics
 - The current metrics are:
