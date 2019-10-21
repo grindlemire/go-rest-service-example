@@ -33,7 +33,7 @@ func (a Authenticator) Authenticate(next http.Handler) http.Handler {
 			return
 		}
 
-		// check the basic auth. In a real system you would ues something like jwt auth here
+		// check the basic auth. In a real system you would use something like jwt auth here
 		username, _, found := r.BasicAuth()
 
 		// This random sleep simulates an io operation for checking auth against a db or somthing. It also helps to show the latencies
