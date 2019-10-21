@@ -8,7 +8,6 @@ import (
 	"github.com/vrecan/death"
 
 	"github.com/grindlemire/go-rest-service-example/pkg/config"
-	"github.com/grindlemire/go-rest-service-example/pkg/metrics"
 	"github.com/grindlemire/go-rest-service-example/pkg/rest"
 	"github.com/grindlemire/go-rest-service-example/pkg/router"
 )
@@ -26,11 +25,6 @@ func main() {
 	}
 	d := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 	goRoutines := []io.Closer{}
-
-	// start the prometheus server for metrics
-	m := metrics.NewServer(opts.MetricsPort)
-	m.Start()
-	goRoutines = append(goRoutines, m)
 
 	// start the rest server for serving requests
 	s := rest.NewServer(opts.ServePort, router)

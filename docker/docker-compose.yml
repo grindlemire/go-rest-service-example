@@ -7,7 +7,6 @@ services:
     container_name: go-rest-service
     ports:
       - "4445:4445"
-      - "4446:4446"
     networks:
       - internal
   prometheus:

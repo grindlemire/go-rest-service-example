@@ -13,7 +13,6 @@ In the [docker](./docker) directory run `docker-compose up`. Prometheus will be 
 - [pkg/router](./pkg/router) - Contains all the routing information. Registering a new route or middleware would take place in here
 - [pkg/middleware](./pkg/middleware) - Contains all my middleware. The basics are fingerprinting requests, metrics, and auth. See below for more detail
 - [pkg/handlers](./pkg/handlers) - Contains the actual end handlers for each route.
-- [pkg/metrics](./pkg/metrics) - Contains the lifecycle management for the [prometheus](https://prometheus.io/) server that serves the metrics on a different port than the rest server.
 - [pkg/config](./pkg/config) - Contains the configuration logic that could be used to customize the project. I use env variable injection
 
 
@@ -30,3 +29,4 @@ In the [docker](./docker) directory run `docker-compose up`. Prometheus will be 
     - `http_latency` - records the latency of each request
     - `http_active_requests` - records the number of active requests in memory 
 - This is really just the beginning of stats and can easily be extended by adding more to the [`pkg/middleware/metrics.go`](./pkg/middleware/metrics.go) file.
+- There is a nice interplay where the prometheus metrics measure the latency and responses of all the paths, including the metrics endpoint itself. Yo dawg.

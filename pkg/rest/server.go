@@ -12,6 +12,9 @@ import (
 )
 
 // Server is a wrapper around the http server that manages signals
+// Note that I don't use life' lifecycle here because we have a blocking call for
+// run (so I don't use life.Close or life.Done for managing the background thread.
+// I use the server.ListenAndServe and server.Shutdown).
 type Server struct {
 	*life.Life
 	server *http.Server
@@ -35,19 +38,11 @@ func NewServer(port int, handler http.Handler) (s Server) {
 }
 
 func (s Server) run() {
-	log.Infof("server starting to listen on [%s]", s.server.Addr)
-	go func() {
-		err := s.server.ListenAndServe()
-		if err != nil && err != http.ErrServerClosed {
-			log.Fatalf("unable to start listening: %v", err)
-		}
-	}()
-
-	for {
-		select {
-		case <-s.Done:
-			return
-		}
+	log.Infof("server listening on [%s]", s.server.Addr)
+	log.Infof("prometheus metrics at [%s/metrics]", s.server.Addr)
+	err := s.server.ListenAndServe()
+	if err != nil && err != http.ErrServerClosed {
+		log.Fatalf("unable to start listening: %v", err)
 	}
 }
 
@@ -56,7 +51,6 @@ func (s Server) Close() error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	s.server.Shutdown(ctx)
-	s.Life.Close()
 	log.Info("successfully shut down http server")
 	return nil
 }

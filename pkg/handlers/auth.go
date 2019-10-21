@@ -12,6 +12,7 @@ import (
 func AuthedPage(w http.ResponseWriter, r *http.Request) {
 	fingerprint, err := middleware.GetRequestFingerprint(r)
 	if err != nil {
+		log.Errorf("internal error for path [%s]: %v", r.URL.Path, err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

@@ -28,7 +28,7 @@ func (a Authenticator) Authenticate(next http.Handler) http.Handler {
 		// get the fingerprint of the request for logging and validation
 		fingerprint, err := GetRequestFingerprint(r)
 		if err != nil {
-			log.Errorf("Unable to get request fingerprint: %v", err)
+			log.Errorf("internal error for path [%s]: %v", r.URL.Path, err)
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
