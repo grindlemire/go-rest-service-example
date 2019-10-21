@@ -27,7 +27,16 @@ func main() {
 	goRoutines := []io.Closer{}
 
 	// start the rest server for serving requests
-	s := rest.NewServer(opts.ServePort, router)
+	s, err := rest.NewServer(
+		rest.Handler(router),
+		rest.HTTPPort(opts.HTTPPort),
+		rest.HTTPSPort(opts.HTTPSPort),
+		rest.TLSCertPath(opts.TLSCertPath),
+		rest.TLSKeyPath(opts.TLSKeyPath),
+	)
+	if err != nil {
+		log.Fatalf("unable to create rest server: %v", err)
+	}
 	s.Start()
 	goRoutines = append(goRoutines, s)
 

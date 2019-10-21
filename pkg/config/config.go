@@ -7,8 +7,10 @@ import (
 
 // Opts ...
 type Opts struct {
-	ServePort   int `required:"true" split_words:"true"`
-	MetricsPort int `required:"true" split_words:"true"`
+	HTTPPort    int    `default:"80"           split_words:"true"`
+	HTTPSPort   int    `default:"443"          split_words:"true"`
+	TLSCertPath string `default:"./server.crt" split_words:"true"`
+	TLSKeyPath  string `default:"./server.key" split_words:"true"`
 }
 
 // Load the configuration

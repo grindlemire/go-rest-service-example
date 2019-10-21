@@ -39,7 +39,8 @@ func (a Authenticator) Authenticate(next http.Handler) http.Handler {
 		// This random sleep simulates an io operation for checking auth against a db or somthing. It also helps to show the latencies
 		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
 		if !found || username != pathVars["id"] {
-			w.WriteHeader(http.StatusUnauthorized)
+			w.WriteHeader(http.StatusForbidden)
+			w.Write([]byte("forbidden"))
 			log.Warnf("request[%s] to [%s] from [%s] unauthorized", fingerprint.GetID(), r.URL.String(), fingerprint.GetSource())
 			return
 		}

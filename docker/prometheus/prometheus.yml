@@ -13,5 +13,8 @@ scrape_configs:
     
   - job_name: 'rest-service'
     scrape_interval: 5s
+    scheme: "https"
+    tls_config:
+      insecure_skip_verify: true
     static_configs:
-      - targets: ['go-rest-service:4445']
+      - targets: ['go-rest-service:443']
