@@ -6,7 +6,7 @@ This package uses [gorilla/mux](https://github.com/gorilla/mux) as the base webs
 
 
 # running with docker-compose
-In the [docker](./docker) directory run `docker-compose up`. Prometheus will be listening on http://localhost:9090. The service will be receiving rest requests on http://localhost:4445 and it's metrics endpoint will be on http://localhost:4446
+In the [docker](./docker) directory run `docker-compose build && docker-compose up`. Prometheus will be listening on http://localhost:9090. The service will be receiving rest requests on http://localhost:4445 and it's metrics endpoint will be on http://localhost:4446
 
 ## package responsibility
 - [pkg/rest](./pkg/rest) - Contains the lifecycle management for the rest server
@@ -30,3 +30,12 @@ In the [docker](./docker) directory run `docker-compose up`. Prometheus will be 
     - `http_active_requests` - records the number of active requests in memory 
 - This is really just the beginning of stats and can easily be extended by adding more to the [`pkg/middleware/metrics.go`](./pkg/middleware/metrics.go) file.
 - There is a nice interplay where the prometheus metrics measure the latency and responses of all the paths, including the metrics endpoint itself. Yo dawg.
+
+## Self signed certificates:
+- If you want to run this outside a docker container then just run the command
+    ```
+    openssl req -new -newkey rsa:2048 -days 365 -nodes \
+        -subj "/O=testcert" \
+        -x509 -keyout server.key -out server.crt
+    ``` 
+    to generate self signed certificates to use

@@ -69,9 +69,9 @@ func (s Server) Close() error {
 	return nil
 }
 
-// createRedirect creates a redirect function that will redirect us to the right rest server,
-// even if the https server is served on a nonstandard port
-func createRedirect(httpsPort int) http.HandlerFunc {
+// createHTTPSRedirect creates a redirect function that will redirect us to the right rest server
+// to redirect us from http to https, even if the https server is served on a nonstandard port
+func createHTTPSRedirect(httpsPort int) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		cleanedHost := strings.Split(r.Host, ":")[0]
 		from := fmt.Sprintf("http://%s%s", r.Host, r.RequestURI)
