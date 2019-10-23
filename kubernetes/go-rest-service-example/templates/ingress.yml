@@ -1,0 +1,9 @@
+  
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rest-example-ingress
+spec:
+  backend:
+    serviceName: go-rest-example-service
+    servicePort: 80

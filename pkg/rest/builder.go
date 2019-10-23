@@ -124,7 +124,7 @@ func build(opts ...Opt) (s *Server, err error) {
 			WriteTimeout: 10 * time.Second,
 		},
 		httpRedirectServer: &http.Server{
-			Handler:      createHTTPSRedirect(b.httpsPort),
+			Handler:      b.handler,
 			Addr:         fmt.Sprintf(":%d", b.httpPort),
 			ReadTimeout:  10 * time.Second,
 			WriteTimeout: 10 * time.Second,

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # how to select the deployment
+  name: go-rest-example-deployment
+  labels:
+    app: go-rest-example-deployment
+spec: # This defines what the pod is running (how many replicas, what docker container is in it, etc)
+  replicas: {{ .Values.replicas }}
+  selector: # How to select these pods
+    matchLabels:
+      app: go-rest-example-deployment
+  template:
+    metadata: # The pods will be tagged with this
+      labels:
+        app: go-rest-example-deployment
+    spec: # the docker container that will be run
+      containers:
+      - name: go-rest-example-service
+        image: go-rest-example-service:{{ .Values.imageVersion }}
+        ports:
+        - containerPort: 443
+        - containerPort: 80
