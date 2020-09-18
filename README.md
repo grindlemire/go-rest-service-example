@@ -11,8 +11,8 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
 ## package responsibility
 
 - [pkg/rest](./pkg/server/rest) - Contains the lifecycle management for the rest server
-- [pkg/router](./pkg/server/router) - Contains all the routing information. Registering a new route or middleware would take place in here
-- [pkg/middleware](./pkg/server/middleware) - Contains all my middleware. The basics are fingerprinting requests, metrics, and auth. See below for more detail
+- [pkg/router](./pkg/server/router) - Contains all the routing information. This is where all the middleware and route priority is glued together.
+- [pkg/middleware](./pkg/server/middleware) - Contains all the middleware. The basics are fingerprinting requests, metrics, and auth. See below for more detail
 - [pkg/endpoint](./pkg/server/endpoint) - Contains the actual end handlers for each route. It also contains the binding from endpoint handlers to authentication method.You simply add a new `Endpoint` struct and put it in the authed list or public list if you want a new endpoint.
 - [pkg/config](./pkg/server/config) - Contains the configuration logic that could be used to customize the project. I use env variable injection
 
