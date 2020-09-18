@@ -7,9 +7,10 @@ import (
 	"github.com/grindlemire/log"
 	"github.com/vrecan/death"
 
-	"github.com/grindlemire/go-rest-service-example/pkg/config"
-	"github.com/grindlemire/go-rest-service-example/pkg/rest"
-	"github.com/grindlemire/go-rest-service-example/pkg/router"
+	"github.com/grindlemire/go-rest-service-example/pkg/server/config"
+	"github.com/grindlemire/go-rest-service-example/pkg/server/endpoint"
+	"github.com/grindlemire/go-rest-service-example/pkg/server/rest"
+	"github.com/grindlemire/go-rest-service-example/pkg/server/router"
 )
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 		log.Fatalf("unable to load config: %v", err)
 	}
 
-	router, err := router.NewRouter()
+	router, err := router.NewRouter(endpoint.CreateEndpoints())
 	if err != nil {
 		log.Fatalf("unable to create path router: %v", err)
 	}
