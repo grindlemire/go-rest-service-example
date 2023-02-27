@@ -10,35 +10,35 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
 
 ## package responsibility
 
-- [pkg/rest](./pkg/server/rest) - Contains the lifecycle management for the rest server
-- [pkg/router](./pkg/server/router) - Contains all the routing information. This is where all the middleware and route priority is glued together.
-- [pkg/middleware](./pkg/server/middleware) - Contains all the middleware. The basics are fingerprinting requests, metrics, and auth. See below for more detail
-- [pkg/endpoint](./pkg/server/endpoint) - Contains the actual end handlers for each route. It also contains the binding from endpoint handlers to authentication method.You simply add a new `Endpoint` struct and put it in the authed list or public list if you want a new endpoint.
-- [pkg/config](./pkg/server/config) - Contains the configuration logic that could be used to customize the project. I use env variable injection
+-   [pkg/rest](./pkg/server/rest) - Contains the lifecycle management for the rest server
+-   [pkg/router](./pkg/server/router) - Contains all the routing information. This is where all the middleware and route priority is glued together.
+-   [pkg/middleware](./pkg/server/middleware) - Contains all the middleware. The basics are fingerprinting requests, metrics, and auth. See below for more detail
+-   [pkg/endpoint](./pkg/server/endpoint) - Contains the actual end handlers for each route. It also contains the binding from endpoint handlers to authentication method.You simply add a new `Endpoint` struct and put it in the authed list or public list if you want a new endpoint.
+-   [pkg/config](./pkg/server/config) - Contains the configuration logic that could be used to customize the project. I use env variable injection
 
 ## middleware
 
-- Request pathing is the following:
-  ```
-  fingerprinting -> metrics -> auth -> ... -> handler
-  ```
-  Because we want to fingerprint every request but run metrics on as much of the request lifecycle as possible. Right now fingerprinting, metrics, and auth are the only middleware implemented but in a real project it could easily be extended in the [middleware](./pkg/middleware) package.
+-   Request pathing is the following:
+    ```
+    fingerprinting -> metrics -> auth -> ... -> handler
+    ```
+    Because we want to fingerprint every request but run metrics on as much of the request lifecycle as possible. Right now fingerprinting, metrics, and auth are the only middleware implemented but in a real project it could easily be extended in the [middleware](./pkg/middleware) package.
 
 ## metrics
 
-- The current metrics are:
-  - `http_responses` - records the response codes per path
-  - `http_latency` - records the latency of each request
-  - `http_active_requests` - records the number of active requests in memory
-- This is really just the beginning of stats and can easily be extended by adding more to the [`pkg/middleware/metrics.go`](./pkg/middleware/metrics.go) file.
-- There is a nice interplay where the prometheus metrics measure the latency and responses of all the paths, including the metrics endpoint itself. Yo dawg.
+-   The current metrics are:
+    -   `http_responses` - records the response codes per path
+    -   `http_latency` - records the latency of each request
+    -   `http_active_requests` - records the number of active requests in memory
+-   This is really just the beginning of stats and can easily be extended by adding more to the [`pkg/middleware/metrics.go`](./pkg/middleware/metrics.go) file.
+-   There is a nice interplay where the prometheus metrics measure the latency and responses of all the paths, including the metrics endpoint itself. Yo dawg.
 
 ## Self signed certificates:
 
-- If you want to run this outside a docker container then just run the command
-  ```
-  openssl req -new -newkey rsa:2048 -days 365 -nodes \
-      -subj "/O=testcert" \
-      -x509 -keyout server.key -out server.crt
-  ```
-  to generate self signed certificates to use
+-   If you want to run this outside a docker container then just run the command
+    ```
+    openssl req -new -newkey rsa:2048 -days 365 -nodes \
+        -subj "/O=testcert" \
+        -x509 -keyout server.key -out server.crt
+    ```
+    to generate self signed certificates to use
