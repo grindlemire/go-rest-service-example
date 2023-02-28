@@ -27,6 +27,7 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
 ## metrics
 
 -   The current metrics are:
+    -   `another metric` - records another metric
     -   `http_responses` - records the response codes per path
     -   `http_latency` - records the latency of each request
     -   `http_active_requests` - records the number of active requests in memory
@@ -42,3 +43,5 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
         -x509 -keyout server.key -out server.crt
     ```
     to generate self signed certificates to use
+
+# other section
