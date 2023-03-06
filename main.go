@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	log.Init(log.Default)
+	log.Init(log.Opts{})
 	opts, err := config.Load("./env")
 	if err != nil {
 		log.Fatalf("unable to load config: %v", err)

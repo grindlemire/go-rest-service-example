@@ -28,6 +28,7 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
 
 -   The current metrics are:
     -   `another metric` - records another metric
+    -   `yet another` - records
     -   `http_responses` - records the response codes per path
     -   `http_latency` - records the latency of each request
     -   `http_active_requests` - records the number of active requests in memory
@@ -36,7 +37,7 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
 
 ## Self signed certificates:
 
--   If you want to run this outside a docker container then just run the command
+-   If you want to run this outside a docker container then just run the commands
     ```
     openssl req -new -newkey rsa:2048 -days 365 -nodes \
         -subj "/O=testcert" \
@@ -44,4 +45,6 @@ In the [docker](./docker) directory run `docker-compose build && docker-compose 
     ```
     to generate self signed certificates to use
 
-# other section
+# other foo
+
+# other bar
